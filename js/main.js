@@ -1,21 +1,21 @@
 'use strict';
 
 var TITLE = ' Заголовок';
-var PRICE = { min: 10000, max: 50000 }
+var PRICE = {min: 10000, max: 50000};
 var TYPE = ['palace', 'flat', 'house', 'bungalo'];
-var ROOMS = { min: 1, max: 3 };
-var GUESTS = { min: 0, max: 3 };
+var ROOMS = {min: 1, max: 3};
+var GUESTS = {min: 0, max: 3};
 var CHECKIN = ['12:00', '13:00', '14:00'];
 var CHECKOUT = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var DESCRIPTION = ' Описание';
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var LOCATION = {
-  x: { min: 130, max: 630 },
-  y: { min: 130, max: 630 }
-}
-const MAP_PIN_AMOUNT = 8;
-const PIN_SIZE = {
+  x: {min: 130, max: 630},
+  y: {min: 130, max: 630}
+};
+var MAP_PIN_AMOUNT = 8;
+var PIN_SIZE = {
   width: 65,
   height: 65
 };
@@ -30,7 +30,7 @@ function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
-};
+}
 
 function getRandomArrValue(arr) {
   var index = getRandomInt(0, arr.length);
@@ -38,8 +38,8 @@ function getRandomArrValue(arr) {
 }
 
 function getAvatar(id) {
-  return 'img/avatars/user0' + (id < 10 ? '0' + id : id) + '.png'
-};
+  return 'img/avatars/user0' + (id < 10 ? '0' + id : id) + '.png';
+}
 
 function generateMockObject(count) {
   var res = [];
@@ -68,18 +68,17 @@ function generateMockObject(count) {
         x: x,
         y: y
       }
-    }
+    };
     res.push(obj);
   }
-  console.log(res);
   return res;
-};
+}
 
 function getPinWithOffset(pinObj) {
   return {
     x: pinObj.x - PIN_SIZE.width / 2,
     y: pinObj.y - PIN_SIZE.height / 2
-  }
+  };
 }
 
 function renderPin(pin) {
@@ -87,7 +86,7 @@ function renderPin(pin) {
   var pinElement = pinTemplate.cloneNode(true);
   pinElement.querySelector('img').src = pin.author.avatar;
   pinElement.querySelector('img').alt = pin.offer.description;
-  pinElement.style = 'left: ' + pinPosition.x + 'px; top: ' + pinPosition.y + 'px;'
+  pinElement.style = 'left: ' + pinPosition.x + 'px; top: ' + pinPosition.y + 'px;';
   return pinElement;
 }
 
