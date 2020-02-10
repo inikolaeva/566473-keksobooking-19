@@ -139,7 +139,7 @@ function renderPin(pin) {
 
 for (var i = 0; i < MAP_PIN_AMOUNT; i++) {
   var pinElement = renderPin(generateMockObject(i + 1));
-  fragment.appendChild(pinObj);
+  fragment.appendChild(pinElement);
 }
 mapPins.appendChild(fragment);
 map.classList.remove('map--faded');
