@@ -81,16 +81,13 @@ function getRandomArrValue(arr) {
 }
 
 function getRandomArrValueWithRandomSize(arr) {
-  var randomSize = getRandomInt(1, arr.length);
-  var result = [];
-  for (var i = 0; i < randomSize; i++) {
-    var randomValue = getRandomArrValue(arr);
-    while (result.includes(randomValue)) {
-      randomValue = getRandomArrValue(arr);
-    }
-    result.push(randomValue);
+  var reduceAmount = getRandomInt(0, arr.length - 1);
+  var results = arr.slice();
+  for (var i = 0; i < reduceAmount; i++) {
+    var randomIndex = getRandomInt(0, results.length);
+    results.splice(randomIndex, 1);
   }
-  return result;
+  return results;
 }
 
 function getAvatar(id) {
