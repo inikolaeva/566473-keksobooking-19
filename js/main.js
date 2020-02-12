@@ -63,9 +63,9 @@ var PIN_SIZE = {
   height: 65
 };
 
-var map = document.querySelector('.map');
-var mapPins = document.querySelector('.map__pins');
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var mapElement = document.querySelector('.map');
+var mapPinsElement = document.querySelector('.map__pins');
+var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
 var fragment = document.createDocumentFragment();
 
 // min - inclusive, max - exclusive
@@ -82,11 +82,15 @@ function getRandomArrValue(arr) {
 
 function getRandomArrValueWithRandomSize(arr) {
   var randomSize = getRandomInt(1, arr.length);
-  var res = [];
+  var result = [];
   for (var i = 0; i < randomSize; i++) {
-    res.push(getRandomArrValue(arr));
+    var randomValue = getRandomArrValue(arr);
+    while (result.includes(randomValue)) {
+      randomValue = getRandomArrValue(arr);
+    }
+    result.push(randomValue);
   }
-  return res;
+  return result;
 }
 
 function getAvatar(id) {
@@ -109,7 +113,7 @@ function generateMockObject(id) {
       guests: getRandomInt(GUESTS.min, GUESTS.max),
       checkin: getRandomArrValue(CHECKIN),
       checkout: getRandomArrValue(CHECKOUT),
-      features: getRandomArrValue(FEATURES),
+      features: getRandomArrValueWithRandomSize(FEATURES),
       description: getRandomArrValue(DESCRIPTION),
       photos: getRandomArrValueWithRandomSize(PHOTOS)
     },
@@ -129,10 +133,10 @@ function getPinWithOffset(pinObj) {
 
 function renderPin(pin) {
   var pinPosition = getPinWithOffset(pin.location);
-  var pinElement = pinTemplate.cloneNode(true);
-  var img = pinElement.querySelector('img');
-  img.src = pin.author.avatar;
-  img.alt = pin.offer.description;
+  var pinElement = pinTemplateElement.cloneNode(true);
+  var imgElement = pinElement.querySelector('img');
+  imgElement.src = pin.author.avatar;
+  imgElement.alt = pin.offer.description;
   pinElement.style = 'left: ' + pinPosition.x + 'px; top: ' + pinPosition.y + 'px;';
   return pinElement;
 }
@@ -141,5 +145,5 @@ for (var i = 0; i < MAP_PIN_AMOUNT; i++) {
   var pinElement = renderPin(generateMockObject(i + 1));
   fragment.appendChild(pinElement);
 }
-mapPins.appendChild(fragment);
-map.classList.remove('map--faded');
+mapPinsElement.appendChild(fragment);
+mapElement.classList.remove('map--faded');
