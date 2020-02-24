@@ -156,7 +156,7 @@ function renderPin(pin) {
   return pinElement;
 }
 
-for (i = 0; i < MAP_PIN_AMOUNT; i++) {
+for (var i = 0; i < MAP_PIN_AMOUNT; i++) {
   var pinElement = renderPin(generateMockObject(i + 1));
   fragment.appendChild(pinElement);
 }
