@@ -71,7 +71,7 @@ var roomsForGuestsOptions = {
   3: [1, 2, 3],
   100: [0]
 };
-var i; // счетчик для цикла for
+
 var mapElement = document.querySelector('.map');
 var mapPinsElement = document.querySelector('.map__pins');
 var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -101,7 +101,7 @@ function getRandomArrValue(arr) {
 function getRandomArrValueWithRandomSize(arr) {
   var reduceAmount = getRandomInt(0, arr.length - 1);
   var results = arr.slice();
-  for (i = 0; i < reduceAmount; i++) {
+  for (var i = 0; i < reduceAmount; i++) {
     var randomIndex = getRandomInt(0, results.length);
     results.splice(randomIndex, 1);
   }
