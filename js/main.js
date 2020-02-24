@@ -62,6 +62,8 @@ var PIN_SIZE = {
   width: 65,
   height: 65
 };
+var ENTER_KEYCODE = 13;
+var LEFT_MOUSE_CODE = 0;
 
 var roomsForGuestsOptions = {
   1: [1],
@@ -69,7 +71,7 @@ var roomsForGuestsOptions = {
   3: [1, 2, 3],
   100: [0]
 };
-
+var i; // счетчик для цикла for
 var mapElement = document.querySelector('.map');
 var mapPinsElement = document.querySelector('.map__pins');
 var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -99,7 +101,7 @@ function getRandomArrValue(arr) {
 function getRandomArrValueWithRandomSize(arr) {
   var reduceAmount = getRandomInt(0, arr.length - 1);
   var results = arr.slice();
-  for (var i = 0; i < reduceAmount; i++) {
+  for (i = 0; i < reduceAmount; i++) {
     var randomIndex = getRandomInt(0, results.length);
     results.splice(randomIndex, 1);
   }
@@ -154,7 +156,7 @@ function renderPin(pin) {
   return pinElement;
 }
 
-for (var i = 0; i < MAP_PIN_AMOUNT; i++) {
+for (i = 0; i < MAP_PIN_AMOUNT; i++) {
   var pinElement = renderPin(generateMockObject(i + 1));
   fragment.appendChild(pinElement);
 }
@@ -168,7 +170,7 @@ function setAddress() {
 
 // Смена состояния страницы
 function setState(elements, state) {
-  for (var i = 0; i < elements.length; i++) {
+  for (i = 0; i < elements.length; i++) {
     elements[i].disabled = state;
   }
 }
@@ -190,13 +192,13 @@ function setActiveState() {
 }
 
 mapPinMainElement.addEventListener('mousedown', function (evt) {
-  if (evt.button === 0) {
+  if (evt.button === LEFT_MOUSE_CODE) {
     setActiveState();
   }
 });
 
 mapPinMainElement.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  if (evt.keyCode === ENTER_KEYCODE) {
     setActiveState();
   }
 });
@@ -207,12 +209,12 @@ mapPinMainElement.addEventListener('change', setAddress);
 function setAvailableGuestAmount(roomNumber) {
   var guestOptions = guestElement.querySelectorAll('option');
   // Задизеблить все
-  for (var i = 0; i < guestOptions.length; i++) {
+  for (i = 0; i < guestOptions.length; i++) {
     guestOptions[i].disabled = true;
   }
   // Раздизейблить, которые соответствуют выбранному кол-ву комнат
   var guestAmount = roomsForGuestsOptions[roomNumber];
-  for (var i = 0; i < guestOptions.length; i++) {
+  for (i = 0; i < guestOptions.length; i++) {
     if (guestAmount.includes(Number(guestOptions[i].value))) {
       guestOptions[i].disabled = false;
     }
@@ -222,7 +224,7 @@ function setAvailableGuestAmount(roomNumber) {
   if (guestEnabledOption) {
     guestEnabledOption.setAttribute('selected', true);
   }
-};
+}
 
 roomNumberElement.addEventListener('change', function () {
   setAvailableGuestAmount(roomNumberElement.value);
