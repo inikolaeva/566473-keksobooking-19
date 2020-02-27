@@ -62,11 +62,22 @@ var PIN_SIZE = {
   width: 65,
   height: 65
 };
+var ENTER_KEYCODE = 13;
+var LEFT_MOUSE_CODE = 0;
 
 var mapElement = document.querySelector('.map');
 var mapPinsElement = document.querySelector('.map__pins');
 var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
 var fragment = document.createDocumentFragment();
+var adFormElement = document.querySelector('.ad-form');
+var adFormFieldsetElements = adFormElement.querySelectorAll('fieldset');
+var mapFilterElement = document.querySelector('.map__filters');
+var mapFilterSelectElements = mapFilterElement.querySelectorAll('select');
+var mapFilterFieldsetElements = mapFilterElement.querySelectorAll('fieldset');
+var mapPinMainElement = document.querySelector('.map__pin--main');
+var roomNumberElement = document.querySelector('#room_number');
+var guestElement = document.querySelector('#capacity');
+var addressInputElement = document.querySelector('#address');
 
 // min - inclusive, max - exclusive
 function getRandomInt(min, max) {
@@ -138,9 +149,69 @@ function renderPin(pin) {
   return pinElement;
 }
 
-for (var i = 0; i < MAP_PIN_AMOUNT; i++) {
-  var pinElement = renderPin(generateMockObject(i + 1));
+function setAddress() {
+  addressInputElement.value = (mapPinMainElement.offsetTop + PIN_SIZE.width) + ', ' + (mapPinMainElement.offsetLeft + PIN_SIZE.height / 2);
+}
+
+function setState(elements, state) {
+  for (var k = 0; k < elements.length; k++) {
+    elements[k].disabled = state;
+  }
+}
+
+function setDisabledState(state) {
+  setState(adFormFieldsetElements, state);
+  setState(mapFilterSelectElements, state);
+  setState(mapFilterFieldsetElements, state);
+}
+
+function setActiveState() {
+  setDisabledState(false);
+  mapElement.classList.remove('map--faded');
+  adFormElement.classList.remove('ad-form--disabled');
+  setAddress();
+  setAvailableGuestAmount();
+}
+
+function setAvailableGuestAmount() {
+  var roomNumber = Number(roomNumberElement.value);
+  var selectedGuestValue = Number(guestElement.value);
+  if ((roomNumber === 100 && selectedGuestValue !== 0) || (roomNumber !== 100 && selectedGuestValue === 0)) {
+    guestElement.setCustomValidity('"не для гостей" можно выбрать только для "100 мест"');
+  } else if (roomNumber < selectedGuestValue) {
+    guestElement.setCustomValidity('Такое количество гостей недопустимо: 1 комната — «для 1 гостя»; 2 комнаты — «для 1 или 2 гостей»;3 комнаты — «для 1-3 гостей»');
+  } else {
+    guestElement.setCustomValidity('');
+  }
+}
+
+function onMousedownMapPinMain(evt) {
+  if (evt.button === LEFT_MOUSE_CODE) {
+    setActiveState();
+    mapPinMainElement.removeEventListener('mousedown', onMousedownMapPinMain);
+  }
+}
+
+function onKeydownMapPinMain(evt) {
+  if (evt.button === ENTER_KEYCODE) {
+    setActiveState();
+    mapPinMainElement.removeEventListener('keydown', onKeydownMapPinMain);
+  }
+}
+
+// Обработчики
+mapPinMainElement.addEventListener('mousedown', onMousedownMapPinMain);
+mapPinMainElement.addEventListener('keydown', onKeydownMapPinMain);
+mapPinMainElement.addEventListener('change', setAddress);
+roomNumberElement.addEventListener('change', setAvailableGuestAmount);
+guestElement.addEventListener('change', setAvailableGuestAmount);
+
+// Код при загрузке скрипта
+for (var j = 0; j < MAP_PIN_AMOUNT; j++) {
+  var pinElement = renderPin(generateMockObject(j + 1));
   fragment.appendChild(pinElement);
 }
 mapPinsElement.appendChild(fragment);
-mapElement.classList.remove('map--faded');
+setDisabledState(true);
+
+
