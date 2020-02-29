@@ -1,6 +1,6 @@
 'use strict';
 
-(function(){
+(function () {
   var TITLE = [
     'Уютное гнездышко для молодоженов',
     'Маленькая квартирка рядом с парком',
@@ -92,18 +92,18 @@
   }
 
   window.mockData = {
-    TITLE,
-    PRICE,
-    HOUSING_TYPES,
-    ROOMS,
-    GUESTS,
-    CHECKIN,
-    CHECKOUT,
-    FEATURES,
-    DESCRIPTION,
-    PHOTOS,
-    LOCATION,
-    MAP_PIN_AMOUNT,
-    generateMockObject
-  }
+    TITLE: TITLE,
+    PRICE: PRICE,
+    HOUSING_TYPES: HOUSING_TYPES,
+    ROOMS: ROOMS,
+    GUESTS: GUESTS,
+    CHECKIN: CHECKIN,
+    CHECKOUT: CHECKOUT,
+    FEATURES: FEATURES,
+    DESCRIPTION: DESCRIPTION,
+    PHOTOS: PHOTOS,
+    LOCATION: LOCATION,
+    MAP_PIN_AMOUNT: MAP_PIN_AMOUNT,
+    generateMockObject: generateMockObject
+  };
 })();

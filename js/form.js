@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var PIN_SIZE = window.consts.PIN_SIZE;
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
   var mapPinMainElement = document.querySelector('.map__pin--main');
@@ -27,7 +28,7 @@
   guestElement.addEventListener('change', setAvailableGuestAmount);
 
   window.form = {
-    setAddress,
-    setAvailableGuestAmount
-  }
+    setAddress: setAddress,
+    setAvailableGuestAmount: setAvailableGuestAmount
+  };
 })();

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var PIN_SIZE = window.consts.PIN_SIZE;
   var ENTER_KEYCODE = window.consts.ENTER_KEYCODE;
   var LEFT_MOUSE_CODE = window.consts.LEFT_MOUSE_CODE;
   var mapPinMainElement = document.querySelector('.map__pin--main');
@@ -25,14 +26,14 @@
 
   function onMousedownMapPinMain(evt) {
     if (evt.button === LEFT_MOUSE_CODE) {
-      window.pageStates.setActiveState();
+      window.map.setActiveState();
       mapPinMainElement.removeEventListener('mousedown', onMousedownMapPinMain);
     }
   }
 
   function onKeydownMapPinMain(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      window.pageStates.setActiveState();
+      window.map.setActiveState();
       mapPinMainElement.removeEventListener('keydown', onKeydownMapPinMain);
     }
   }
@@ -40,6 +41,6 @@
   mapPinMainElement.addEventListener('keydown', onKeydownMapPinMain);
 
   window.pin = {
-    renderPin
-  }
+    renderPin: renderPin
+  };
 })();

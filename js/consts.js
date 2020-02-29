@@ -9,8 +9,8 @@
   };
 
   window.consts = {
-    ENTER_KEYCODE,
-    LEFT_MOUSE_CODE,
-    PIN_SIZE
-  }
+    ENTER_KEYCODE: ENTER_KEYCODE,
+    LEFT_MOUSE_CODE: LEFT_MOUSE_CODE,
+    PIN_SIZE: PIN_SIZE
+  };
 })();
