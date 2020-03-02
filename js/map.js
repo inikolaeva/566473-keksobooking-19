@@ -30,8 +30,9 @@
     window.form.setAvailableGuestAmount();
   }
 
+  setDisabledState(true);
+
   window.map = {
-    setActiveState: setActiveState,
-    setDisabledState: setDisabledState
+    setActiveState: setActiveState
   };
 })();
