@@ -1,10 +1,15 @@
 'use strict';
 
 (function () {
-  var PIN_SIZE = window.consts.PIN_SIZE;
-  var ENTER_KEYCODE = window.consts.ENTER_KEYCODE;
-  var LEFT_MOUSE_CODE = window.consts.LEFT_MOUSE_CODE;
+  var PIN_SIZE = {
+    width: 65,
+    height: 65
+  };
+  var ENTER_KEYCODE = 13;
+  var LEFT_MOUSE_CODE = 0;
   var mapPinMainElement = document.querySelector('.map__pin--main');
+  var mapPinsElement = document.querySelector('.map__pins');
+  var fragment = document.createDocumentFragment();
 
   var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
   function getPinWithOffset(pinObj) {
@@ -37,10 +42,40 @@
       mapPinMainElement.removeEventListener('keydown', onKeydownMapPinMain);
     }
   }
+
+  function displayAllPins(pins) {
+    for (var j = 0; j < pins.length; j++) {
+      var pinElement = renderPin(pins[j]);
+      fragment.appendChild(pinElement);
+    }
+    mapPinsElement.appendChild(fragment);
+  }
+
+  function successHandler(pins) {
+    displayAllPins(pins);
+  }
+
+  function errorHandler(errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  }
+
+  function pinsLoad() {
+    window.load.load(successHandler, errorHandler);
+  }
+
   mapPinMainElement.addEventListener('mousedown', onMousedownMapPinMain);
   mapPinMainElement.addEventListener('keydown', onKeydownMapPinMain);
 
   window.pin = {
-    renderPin: renderPin
+    pinsLoad: pinsLoad,
+    PIN_SIZE: PIN_SIZE
   };
 })();
