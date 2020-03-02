@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var PIN_SIZE = window.consts.PIN_SIZE;
+  var PIN_SIZE = window.pin.PIN_SIZE;
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
   var mapPinMainElement = document.querySelector('.map__pin--main');

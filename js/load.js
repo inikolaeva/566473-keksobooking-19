@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  var URL = window.consts.URL;
-  var TIMEOUT_IN_MS = window.consts.TIMEOUT_IN_MS;
+  var URL = 'https://js.dump.academy/keksobooking/data';
+  var TIMEOUT_IN_MS = 10000;
   var StatusCode = {
     OK: 200
   };

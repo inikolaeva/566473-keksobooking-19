@@ -1,9 +1,12 @@
 'use strict';
 
 (function () {
-  var PIN_SIZE = window.consts.PIN_SIZE;
-  var ENTER_KEYCODE = window.consts.ENTER_KEYCODE;
-  var LEFT_MOUSE_CODE = window.consts.LEFT_MOUSE_CODE;
+  var PIN_SIZE = {
+    width: 65,
+    height: 65
+  };
+  var ENTER_KEYCODE = 13;
+  var LEFT_MOUSE_CODE = 0;
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapPinsElement = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
@@ -72,6 +75,7 @@
   mapPinMainElement.addEventListener('keydown', onKeydownMapPinMain);
 
   window.pin = {
-    pinsLoad: pinsLoad
+    pinsLoad: pinsLoad,
+    PIN_SIZE: PIN_SIZE
   };
 })();
