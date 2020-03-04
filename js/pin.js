@@ -10,8 +10,8 @@
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapPinsElement = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
-
   var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
+
   function getPinWithOffset(pinObj) {
     return {
       x: pinObj.x - PIN_SIZE.width / 2,
@@ -53,6 +53,7 @@
 
   function successHandler(pins) {
     displayAllPins(pins);
+    window.card.renderCard(pins[0]);
   }
 
   function errorHandler(errorMessage) {
