@@ -24,7 +24,7 @@
   function setActiveState() {
     setDisabledState(false);
     mapElement.classList.remove('map--faded');
-    window.pin.pinsLoad();
+    window.pin.getData();
     adFormElement.classList.remove('ad-form--disabled');
     window.form.setAddress();
     window.form.setAvailableGuestAmount();

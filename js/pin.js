@@ -53,7 +53,7 @@
 
   function successHandler(pins) {
     displayAllPins(pins);
-    window.card.renderCard(pins[0]);
+    window.card.render(pins[0]);
   }
 
   function errorHandler(errorMessage) {
@@ -68,15 +68,15 @@
     document.body.insertAdjacentElement('afterbegin', node);
   }
 
-  function pinsLoad() {
-    window.load.load(successHandler, errorHandler);
+  function getData() {
+    window.load.getData(successHandler, errorHandler);
   }
 
   mapPinMainElement.addEventListener('mousedown', onMousedownMapPinMain);
   mapPinMainElement.addEventListener('keydown', onKeydownMapPinMain);
 
   window.pin = {
-    pinsLoad: pinsLoad,
+    getData: getData,
     PIN_SIZE: PIN_SIZE
   };
 })();
