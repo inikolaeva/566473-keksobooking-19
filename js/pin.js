@@ -10,8 +10,8 @@
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapPinsElement = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
-
   var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
+
   function getPinWithOffset(pinObj) {
     return {
       x: pinObj.x - PIN_SIZE.width / 2,
@@ -53,6 +53,7 @@
 
   function successHandler(pins) {
     displayAllPins(pins);
+    window.card.render(pins[0]);
   }
 
   function errorHandler(errorMessage) {
@@ -67,15 +68,15 @@
     document.body.insertAdjacentElement('afterbegin', node);
   }
 
-  function pinsLoad() {
-    window.load.load(successHandler, errorHandler);
+  function getData() {
+    window.load.getData(successHandler, errorHandler);
   }
 
   mapPinMainElement.addEventListener('mousedown', onMousedownMapPinMain);
   mapPinMainElement.addEventListener('keydown', onKeydownMapPinMain);
 
   window.pin = {
-    pinsLoad: pinsLoad,
+    getData: getData,
     PIN_SIZE: PIN_SIZE
   };
 })();

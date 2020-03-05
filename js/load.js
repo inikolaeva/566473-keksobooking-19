@@ -6,7 +6,7 @@
   var StatusCode = {
     OK: 200
   };
-  function load(onSuccess, onError) {
+  function getData(onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -31,7 +31,7 @@
   }
 
   window.load = {
-    load: load
+    getData: getData
   };
 
 })();
