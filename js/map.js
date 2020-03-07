@@ -19,6 +19,7 @@
     setState(adFormFieldsetElements, state);
     setState(mapFilterSelectElements, state);
     setState(mapFilterFieldsetElements, state);
+    window.form.removeAdFormListeners();
   }
 
   function setActiveState() {
@@ -26,6 +27,7 @@
     mapElement.classList.remove('map--faded');
     window.pin.getData();
     adFormElement.classList.remove('ad-form--disabled');
+    window.form.adFormListeners();
     window.form.setAddress();
     window.form.setAvailableGuestAmount();
   }

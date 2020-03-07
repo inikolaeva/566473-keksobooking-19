@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-
+  var ENTER_KEYCODE = 13;
   var cardTemplateElement = document.querySelector('#card').content.querySelector('.map__card');
   var popupPhoto = cardTemplateElement.querySelector('.popup__photo');
   var mapFiltersContainerElement = document.querySelector('.map__filters-container');
@@ -29,6 +29,25 @@
     popupPhotosElement.appendChild(createPhotosFragment(pinData.offer.photos));
     cardElement.querySelector('.popup__avatar').src = pinData.author.avatar;
     mapFiltersContainerElement.insertAdjacentElement('beforebegin', cardElement);
+    var closeCardElement = cardElement.querySelector('.popup__close');
+    function closeCard() {
+      cardElement.remove();
+      closeCardElement.removeEventListener('click', onClickCloseCard);
+      closeCardElement.removeEventListener('keydown', onKeydownCloseCard);
+    }
+
+    function onClickCloseCard() {
+      closeCard();
+    }
+
+    function onKeydownCloseCard(evt) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        closeCard();
+      }
+    }
+
+    closeCardElement.addEventListener('click', onClickCloseCard);
+    closeCardElement.addEventListener('keydown', onKeydownCloseCard);
   }
 
   function createFeatureFragment(features) {
