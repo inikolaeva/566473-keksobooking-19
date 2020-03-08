@@ -29,6 +29,7 @@
     adFormElement.classList.remove('ad-form--disabled');
     window.form.adFormListeners();
     window.form.setAddress();
+    window.form.setPriceValidation();
     window.form.setAvailableGuestAmount();
   }
 

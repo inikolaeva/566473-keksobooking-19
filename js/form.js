@@ -2,14 +2,10 @@
 
 (function () {
   var PIN_SIZE = window.pin.PIN_SIZE;
-  var MIN_TITLE_LENGTH = 30;
-  var MAX_TITLE_LENGTH = 100;
-  var MIN_PRICE_LENGTH = 1000000;
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var addressElement = document.querySelector('#address');
-  var titleElement = document.querySelector('#title');
   var typeElement = document.querySelector('#type');
   var priceElement = document.querySelector('#price');
   var timeInElement = document.querySelector('#timein');
@@ -22,7 +18,9 @@
   };
 
   function onPinChange() {
-    addressElement.value = (mapPinMainElement.offsetTop + PIN_SIZE.width) + ', ' + (mapPinMainElement.offsetLeft + PIN_SIZE.height / 2);
+    var x = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.width);
+    var y = Math.round(mapPinMainElement.offsetLeft + PIN_SIZE.height / 2);
+    addressElement.value = x + ', ' + y;
   }
 
   function onRoomGuestChange() {
@@ -37,17 +35,8 @@
     }
   }
 
-  function onTitleInputValidation() {
-    titleElement.minLength = MIN_TITLE_LENGTH;
-    titleElement.maxLength = MAX_TITLE_LENGTH;
-  }
-
-  function onPriceInputValidation() {
-    priceElement.max = MIN_PRICE_LENGTH;
-  }
-
-  function onTypeInputChange(evt) {
-    var selectedType = evt.target.value.toLowerCase();
+  function onTypeInputChange() {
+    var selectedType = typeElement.value.toLowerCase();
     var minPrice = OfferTypeMinPriceMapping[selectedType];
     priceElement.min = minPrice;
     priceElement.placeholder = minPrice.toString();
@@ -62,8 +51,6 @@
     mapPinMainElement.addEventListener('change', onPinChange);
     roomNumberElement.addEventListener('change', onRoomGuestChange);
     guestElement.addEventListener('change', onRoomGuestChange);
-    titleElement.addEventListener('input', onTitleInputValidation);
-    priceElement.addEventListener('input', onPriceInputValidation);
     typeElement.addEventListener('change', onTypeInputChange);
     timeInElement.addEventListener('change', onTimeInTimeOutChange);
     timeOutElement.addEventListener('change', onTimeInTimeOutChange);
@@ -73,8 +60,6 @@
     mapPinMainElement.removeEventListener('change', onPinChange);
     roomNumberElement.removeEventListener('change', onRoomGuestChange);
     guestElement.removeEventListener('change', onRoomGuestChange);
-    titleElement.removeEventListener('input', onTitleInputValidation);
-    priceElement.removeEventListener('input', onPriceInputValidation);
     typeElement.removeEventListener('change', onTypeInputChange);
     timeInElement.removeEventListener('change', onTimeInTimeOutChange);
     timeOutElement.removeEventListener('change', onTimeInTimeOutChange);
@@ -84,6 +69,7 @@
     setAddress: onPinChange,
     setAvailableGuestAmount: onRoomGuestChange,
     adFormListeners: adFormListeners,
-    removeAdFormListeners: removeAdFormListeners
+    removeAdFormListeners: removeAdFormListeners,
+    setPriceValidation: onTypeInputChange
   };
 })();

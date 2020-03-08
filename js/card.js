@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var ENTER_KEYCODE = 13;
+  var ESC_KEYCODE = 27;
   var cardTemplateElement = document.querySelector('#card').content.querySelector('.map__card');
   var popupPhoto = cardTemplateElement.querySelector('.popup__photo');
   var mapFiltersContainerElement = document.querySelector('.map__filters-container');
@@ -41,7 +41,7 @@
     }
 
     function onKeydownCloseCard(evt) {
-      if (evt.keyCode === ENTER_KEYCODE) {
+      if (evt.keyCode === ESC_KEYCODE) {
         closeCard();
       }
     }
