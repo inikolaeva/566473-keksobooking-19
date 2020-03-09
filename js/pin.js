@@ -2,10 +2,10 @@
 
 (function () {
   var PIN_SIZE = {
-    width: 62,
-    height: 62
+    width: 65,
+    height: 65
   };
-  var TAIL_HEIGHT = 22;
+  var TAIL_HEIGHT = 15;
   var ENTER_KEYCODE = 13;
   var LEFT_MOUSE_CODE = 0;
   var map = document.querySelector('.map');
