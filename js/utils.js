@@ -1,7 +1,7 @@
 'use strict';
 
-(function(){
-  function errorHandler(errorMessage) {
+(function () {
+  function onError(errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
     node.style.position = 'absolute';
@@ -13,7 +13,14 @@
     document.body.insertAdjacentElement('afterbegin', node);
   }
 
+  function setDisabled(elements, state) {
+    for (var k = 0; k < elements.length; k++) {
+      elements[k].disabled = state;
+    }
+  }
+
   window.utils = {
-    errorHandler: errorHandler
+    onError: onError,
+    setDisabled: setDisabled
   }
 })();

@@ -36,10 +36,18 @@
   }
 
   function getData() {
-    window.load.getData(successHandler, window.utils.errorHandler);
+    window.load.getData(successHandler, window.utils.onError);
+  }
+
+  function removePins() {
+    var mapPinElements = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    mapPinElements.forEach(function (mapPin) {
+      mapPin.remove();
+    })
   }
 
   window.pin = {
-    getData: getData
+    getData: getData,
+    removePins: removePins
   };
 })();

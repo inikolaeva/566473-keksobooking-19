@@ -8,11 +8,6 @@
     height: 65
   };
   var mapElement = document.querySelector('.map');
-  var adFormElement = document.querySelector('.ad-form');
-  var adFormFieldsetElements = adFormElement.querySelectorAll('fieldset');
-  var mapFilterElement = document.querySelector('.map__filters');
-  var mapFilterSelectElements = mapFilterElement.querySelectorAll('select');
-  var mapFilterFieldsetElements = mapFilterElement.querySelectorAll('fieldset');
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapOverlayElement = document.querySelector('.map__overlay');
   var addressElement = document.querySelector('#address');
@@ -41,34 +36,27 @@
     addressElement.value = x + ', ' + y;
   }
 
-  function setState(elements, state) {
-    for (var k = 0; k < elements.length; k++) {
-      elements[k].disabled = state;
-    }
-  }
 
-  function setDisabledState(state) {
-    setState(adFormFieldsetElements, state);
-    setState(mapFilterSelectElements, state);
-    setState(mapFilterFieldsetElements, state);
+  function setDisabledState() {
+    activePage = false;
+    window.form.setAdFormDisabled();
+    window.filter.setFilterDisabled();
+    window.pin.removePins();
+    mapElement.classList.add('map--faded');
     setFormAddress(false);
-    window.form.removeAdFormListeners();
   }
 
   function setActiveState() {
-    setDisabledState(false);
+    window.form.setAdFormActive();
+    window.filter.setFilterActive();
     mapElement.classList.remove('map--faded');
     window.pin.getData();
-    adFormElement.classList.remove('ad-form--disabled');
-    window.form.adFormListeners();
     setFormAddress(true);
-    window.form.setPriceValidation();
-    window.form.setAvailableGuestAmount();
   }
 
   function onMapPinMainKeydown(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      window.map.setActiveState();
+      setActiveState();
       activePage = true;
     }
   }
@@ -119,7 +107,7 @@
   }
 
   function init() {
-    setDisabledState(true);
+    setDisabledState();
     mapPinMainElement.addEventListener('mousedown', onMapPinMainMousedown);
     mapPinMainElement.addEventListener('keydown', onMapPinMainKeydown);
   }
@@ -127,6 +115,7 @@
   init();
 
   window.map = {
-    setActiveState: setActiveState
+    setActiveState: setActiveState,
+    setDisabledState: setDisabledState
   };
 })();
