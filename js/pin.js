@@ -43,7 +43,7 @@
     var mapPinElements = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     mapPinElements.forEach(function (mapPin) {
       mapPin.remove();
-    })
+    });
   }
 
   window.pin = {

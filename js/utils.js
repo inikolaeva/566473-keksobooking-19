@@ -22,5 +22,5 @@
   window.utils = {
     onError: onError,
     setDisabled: setDisabled
-  }
+  };
 })();

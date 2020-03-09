@@ -60,65 +60,65 @@
     successElement.remove();
     document.removeEventListener('keydown', onSuccessEscDown);
     successTemplate.removeEventListener('click', onSuccessClick);
-  };
+  }
 
   function showSuccess() {
-    document.body.appendChild(successTemplate)
+    document.body.appendChild(successTemplate);
     document.addEventListener('keydown', onSuccessEscDown);
     successTemplate.addEventListener('click', onSuccessClick);
-  };
+  }
 
   function closeError() {
     var errorElement = document.querySelector('.error');
     errorElement.remove();
     document.removeEventListener('keydown', onErrorEscDown);
     errorTemplate.removeEventListener('click', onErrorClick);
-  };
+  }
 
   function showError() {
-    document.body.appendChild(errorTemplate)
+    document.body.appendChild(errorTemplate);
     document.addEventListener('keydown', onErrorEscDown);
     errorTemplate.addEventListener('click', onErrorClick);
-  };
+  }
 
-  function onFormResetClick(){
+  function onFormResetClick() {
     window.map.setDisabledState();
   }
 
   function onSubmitSuccess() {
     showSuccess();
     window.map.setDisabledState();
-  };
+  }
 
   function onSuccessEscDown(evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       closeSuccess();
     }
-  };
+  }
 
   function onSuccessClick() {
     closeSuccess();
-  };
+  }
 
   function onSubmitError() {
     showError();
-  };
+  }
 
   function onErrorEscDown(evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       closeError();
     }
-  };
+  }
 
   function onErrorClick() {
     closeError();
-  };
+  }
 
   function onSubmitAdForm(evt) {
     evt.preventDefault();
     var formData = new FormData(adFormElement);
     window.load.postData(formData, onSubmitSuccess, onSubmitError);
-  };
+  }
 
   function onRoomGuestChange() {
     var roomNumber = Number(roomNumberElement.value);

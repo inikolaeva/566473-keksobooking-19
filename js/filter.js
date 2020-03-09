@@ -18,5 +18,5 @@
   window.filter = {
     setFilterDisabled: setFilterDisabled,
     setFilterActive: setFilterActive
-  }
+  };
 })();

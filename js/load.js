@@ -4,7 +4,7 @@
   var URL = {
     GET: 'https://js.dump.academy/keksobooking/data',
     POST: 'https://js.dump.academy/keksobooking'
-  }
+  };
   var TIMEOUT_IN_MS = 10000;
   var StatusCode = {
     OK: 200
@@ -42,6 +42,7 @@
     var method = 'POST';
     createXHR(method, URL[method], onSuccess, onError).send(data);
   }
+
   window.load = {
     getData: getData,
     postData: postData
