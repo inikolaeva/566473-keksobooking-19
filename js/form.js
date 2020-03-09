@@ -18,9 +18,14 @@
     palace: 10000
   };
 
-  function setAddress() {
+  function setAddress(isActiveState) {
     var x = Math.round(mapPinMainElement.offsetLeft + PIN_SIZE.width / 2);
-    var y = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.height + TAIL_HEIGHT);
+    var y;
+    if (isActiveState) {
+      y = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.height + TAIL_HEIGHT);
+    } else {
+      y = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.height / 2);
+    }
     addressElement.value = x + ', ' + y;
   }
 

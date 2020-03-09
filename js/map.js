@@ -7,6 +7,7 @@
   var mapFilterElement = document.querySelector('.map__filters');
   var mapFilterSelectElements = mapFilterElement.querySelectorAll('select');
   var mapFilterFieldsetElements = mapFilterElement.querySelectorAll('fieldset');
+  var mapPinMainElement = document.querySelector('.map__pin--main');
 
 
   function setState(elements, state) {
@@ -19,6 +20,7 @@
     setState(adFormFieldsetElements, state);
     setState(mapFilterSelectElements, state);
     setState(mapFilterFieldsetElements, state);
+    window.form.setAddress(false);
     window.form.removeAdFormListeners();
   }
 
@@ -28,12 +30,18 @@
     window.pin.getData();
     adFormElement.classList.remove('ad-form--disabled');
     window.form.adFormListeners();
-    window.form.setAddress();
+    window.form.setAddress(true);
     window.form.setPriceValidation();
     window.form.setAvailableGuestAmount();
   }
 
-  setDisabledState(true);
+  function init() {
+    setDisabledState(true);
+    mapPinMainElement.addEventListener('mousedown', window.pin.onMapPinMainMousedown);
+    mapPinMainElement.addEventListener('keydown', window.pin.onMapPinMainKeydown);
+  }
+
+  init();
 
   window.map = {
     setActiveState: setActiveState
