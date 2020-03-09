@@ -2,7 +2,7 @@
 
 (function () {
   var PIN_SIZE = window.pin.PIN_SIZE;
-  var TAIL_HEIGHT = window.pin.TAIL_HEIGHT
+  var TAIL_HEIGHT = window.pin.TAIL_HEIGHT;
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
   var mapPinMainElement = document.querySelector('.map__pin--main');
