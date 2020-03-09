@@ -2,8 +2,8 @@
 
 (function () {
   var PIN_SIZE = {
-    width: 65,
-    height: 65
+    width: 62,
+    height: 62
   };
   var TAIL_HEIGHT = 22;
   var ENTER_KEYCODE = 13;
