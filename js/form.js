@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var ESC_KEYCODE = 27;
   var PIN_SIZE = window.pin.PIN_SIZE;
   var TAIL_HEIGHT = window.pin.TAIL_HEIGHT;
   var roomNumberElement = document.querySelector('#room_number');
@@ -11,6 +12,9 @@
   var priceElement = document.querySelector('#price');
   var timeInElement = document.querySelector('#timein');
   var timeOutElement = document.querySelector('#timeout');
+  var adFormElement = document.querySelector('.ad-form');
+  var successTemplate = document.querySelector('#success').content.querySelector('.success');
+  var fragment = document.createDocumentFragment();
   var OfferTypeMinPriceMapping = {
     bungalo: 0,
     flat: 1000,
@@ -59,6 +63,7 @@
     typeElement.addEventListener('change', onTypeInputChange);
     timeInElement.addEventListener('change', onTimeInTimeOutChange);
     timeOutElement.addEventListener('change', onTimeInTimeOutChange);
+    adFormElement.addEventListener('submit', onAdFormSubmit);
   }
 
   function removeAdFormListeners() {
@@ -67,7 +72,46 @@
     typeElement.removeEventListener('change', onTypeInputChange);
     timeInElement.removeEventListener('change', onTimeInTimeOutChange);
     timeOutElement.removeEventListener('change', onTimeInTimeOutChange);
+    adFormElement.removeEventListener('submit', onAdFormSubmit);
   }
+
+  function closeSuccess() {
+    successTemplate.classList.add('hidden');
+    document.removeEventListener('keydown', onSuccessEscDown);
+    successTemplate.removeEventListener('click', onSuccessClick);
+  };
+
+  function onSuccessEscDown(evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closeSuccess();
+    }
+  };
+
+  function onSuccessClick() {
+    closeSuccess();
+  };
+
+  function showSuccess() {
+    var success = successTemplate.cloneNode(true);
+    // fragment.appendChild(success);
+    document.body.appendChild(successTemplate)
+
+    document.addEventListener('keydown', onSuccessEscDown);
+    successTemplate.addEventListener('click', onSuccessClick);
+  };
+
+  function successHandler() {
+    showSuccess();
+    // deactivateForm();
+    // window.map.deactivate();
+    // window.filter.deactivate();
+  };
+
+  var onAdFormSubmit = function (evt) {
+    evt.preventDefault();
+    var formData = new FormData(adFormElement);
+    window.load.postData(formData, successHandler, window.utils.errorHandler);
+  };
 
   window.form = {
     setAddress: setAddress,
