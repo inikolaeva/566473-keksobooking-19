@@ -5,6 +5,7 @@
     width: 65,
     height: 65
   };
+  var TAIL_HEIGHT = 22;
   var ENTER_KEYCODE = 13;
   var LEFT_MOUSE_CODE = 0;
   var map = document.querySelector('.map');
@@ -16,7 +17,7 @@
   function getPinWithOffset(pinObj) {
     return {
       x: pinObj.x - PIN_SIZE.width / 2,
-      y: pinObj.y - PIN_SIZE.height
+      y: pinObj.y - PIN_SIZE.height + TAIL_HEIGHT
     };
   }
 
@@ -85,6 +86,7 @@
 
   window.pin = {
     getData: getData,
-    PIN_SIZE: PIN_SIZE
+    PIN_SIZE: PIN_SIZE,
+    TAIL_HEIGHT: TAIL_HEIGHT
   };
 })();

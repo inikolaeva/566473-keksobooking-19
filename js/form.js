@@ -2,6 +2,7 @@
 
 (function () {
   var PIN_SIZE = window.pin.PIN_SIZE;
+  var TAIL_HEIGHT = window.pin.TAIL_HEIGHT
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
   var mapPinMainElement = document.querySelector('.map__pin--main');
@@ -11,15 +12,15 @@
   var timeInElement = document.querySelector('#timein');
   var timeOutElement = document.querySelector('#timeout');
   var OfferTypeMinPriceMapping = {
-    flat: 0,
-    bungalo: 1000,
+    bungalo: 0,
+    flat: 1000,
     house: 5000,
     palace: 10000
   };
 
-  function onPinChange() {
-    var x = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.width);
-    var y = Math.round(mapPinMainElement.offsetLeft + PIN_SIZE.height / 2);
+  function setAddress() {
+    var x = Math.round(mapPinMainElement.offsetLeft + PIN_SIZE.width / 2);
+    var y = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.height + TAIL_HEIGHT);
     addressElement.value = x + ', ' + y;
   }
 
@@ -48,7 +49,6 @@
   }
 
   function adFormListeners() {
-    mapPinMainElement.addEventListener('change', onPinChange);
     roomNumberElement.addEventListener('change', onRoomGuestChange);
     guestElement.addEventListener('change', onRoomGuestChange);
     typeElement.addEventListener('change', onTypeInputChange);
@@ -57,7 +57,6 @@
   }
 
   function removeAdFormListeners() {
-    mapPinMainElement.removeEventListener('change', onPinChange);
     roomNumberElement.removeEventListener('change', onRoomGuestChange);
     guestElement.removeEventListener('change', onRoomGuestChange);
     typeElement.removeEventListener('change', onTypeInputChange);
@@ -66,7 +65,7 @@
   }
 
   window.form = {
-    setAddress: onPinChange,
+    setAddress: setAddress,
     setAvailableGuestAmount: onRoomGuestChange,
     adFormListeners: adFormListeners,
     removeAdFormListeners: removeAdFormListeners,

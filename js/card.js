@@ -33,7 +33,7 @@
     function closeCard() {
       cardElement.remove();
       closeCardElement.removeEventListener('click', onClickCloseCard);
-      closeCardElement.removeEventListener('keydown', onKeydownCloseCard);
+      document.removeEventListener('keydown', onKeydownCloseCard);
     }
 
     function onClickCloseCard() {
@@ -47,7 +47,7 @@
     }
 
     closeCardElement.addEventListener('click', onClickCloseCard);
-    closeCardElement.addEventListener('keydown', onKeydownCloseCard);
+    document.addEventListener('keydown', onKeydownCloseCard);
   }
 
   function createFeatureFragment(features) {
