@@ -1,12 +1,8 @@
 'use strict';
 
 (function () {
-  var PIN_SIZE = window.pin.PIN_SIZE;
-  var TAIL_HEIGHT = window.pin.TAIL_HEIGHT;
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
-  var mapPinMainElement = document.querySelector('.map__pin--main');
-  var addressElement = document.querySelector('#address');
   var typeElement = document.querySelector('#type');
   var priceElement = document.querySelector('#price');
   var timeInElement = document.querySelector('#timein');
@@ -17,17 +13,6 @@
     house: 5000,
     palace: 10000
   };
-
-  function setAddress(isActiveState) {
-    var x = Math.round(mapPinMainElement.offsetLeft + PIN_SIZE.width / 2);
-    var y;
-    if (isActiveState) {
-      y = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.height + TAIL_HEIGHT);
-    } else {
-      y = Math.round(mapPinMainElement.offsetTop + PIN_SIZE.height / 2);
-    }
-    addressElement.value = x + ', ' + y;
-  }
 
   function onRoomGuestChange() {
     var roomNumber = Number(roomNumberElement.value);
@@ -70,7 +55,6 @@
   }
 
   window.form = {
-    setAddress: setAddress,
     setAvailableGuestAmount: onRoomGuestChange,
     adFormListeners: adFormListeners,
     removeAdFormListeners: removeAdFormListeners,
