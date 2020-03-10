@@ -70,7 +70,16 @@
     return photosFragment;
   }
 
+  function close() {
+    var mapCard = document.querySelector('.map__card')
+    if(mapCard) {
+      mapCard.remove();
+    }
+
+  }
+
   window.card = {
-    render: render
+    render: render,
+    close: close
   };
 })();

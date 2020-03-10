@@ -1,6 +1,16 @@
 'use strict';
 
 (function () {
+  var DEBOUNCE_INTERVAL = 300; // ms
+  var lastTimeout;
+
+  function debounce(cb) {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(cb, DEBOUNCE_INTERVAL);
+  }
+
   function onError(errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
@@ -21,6 +31,7 @@
 
   window.utils = {
     onError: onError,
-    setDisabled: setDisabled
+    setDisabled: setDisabled,
+    debounce: debounce
   };
 })();
