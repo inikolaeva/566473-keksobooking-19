@@ -149,16 +149,16 @@
   }
 
   function onTimeInChange() {
-    setTimeSync(timeInElement, timeOutElement)
+    setTimeSync(timeInElement, timeOutElement);
   }
 
   function onTimeOutChange() {
-    setTimeSync(timeOutElement, timeInElement)
+    setTimeSync(timeOutElement, timeInElement);
   }
 
   window.form = {
     setAdFormDisabled: setAdFormDisabled,
     setAdFormActive: setAdFormActive,
-    initForm:initForm
+    initForm: initForm
   };
 })();
