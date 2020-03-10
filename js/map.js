@@ -13,7 +13,7 @@
   var addressElement = document.querySelector('#address');
   var mapPinsElement = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
-  var activePage = false;
+  var isPageActive = false;
   var DragSizeRestiction = {
     TOP: 130,
     BOTTOM: 630,
@@ -40,7 +40,7 @@
 
 
   function setDisabledState() {
-    activePage = false;
+    isPageActive = false;
     window.form.setAdFormDisabled();
     window.filter.toggleFilter(true);
     removePins();
@@ -82,7 +82,7 @@
   function onMapPinMainKeydown(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       setActiveState();
-      activePage = true;
+      isPageActive = true;
     }
   }
 
@@ -113,14 +113,14 @@
       if (mapPinMainPosition.y >= Border.TOP && mapPinMainPosition.y <= Border.BOTTOM) {
         mapPinMainElement.style.top = mapPinMainPosition.y + 'px';
       }
-      setFormAddress(activePage);
+      setFormAddress(isPageActive);
     }
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      if (!activePage) {
+      if (!isPageActive) {
         setActiveState();
-        activePage = true;
+        isPageActive = true;
       }
 
       document.removeEventListener('mousemove', onMouseMove);
@@ -142,6 +142,6 @@
 
   window.map = {
     setDisabledState: setDisabledState,
-    activePage: activePage
+    isPageActive: isPageActive
   };
 })();

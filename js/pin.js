@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map');
   var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
 
   function renderPin(pin) {
@@ -11,10 +10,7 @@
     imgElement.alt = pin.offer.description;
     pinElement.style = 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;';
     function onPinClick() {
-      var mapCardElement = map.querySelector('.map__card');
-      if (mapCardElement) {
-        mapCardElement.remove();
-      }
+      window.card.close();
       window.card.render(pin);
     }
     pinElement.addEventListener('click', onPinClick);

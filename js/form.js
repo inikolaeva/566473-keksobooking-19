@@ -59,8 +59,8 @@
     priceElement.placeholder = minPrice.toString();
   }
 
-  function setTimeSync(time1, time2) {
-    time2.value = time1.value;
+  function syncValues(BasedElement, acceptorElement) {
+    acceptorElement.value = BasedElement.value;
   }
 
   function formListeners() {
@@ -120,7 +120,7 @@
 
   function onSubmitError() {
     showError();
-    window.map.activePage = false;
+    window.map.isPageActive = false;
   }
 
   function onErrorEscDown(evt) {
@@ -149,11 +149,11 @@
   }
 
   function onTimeInChange() {
-    setTimeSync(timeInElement, timeOutElement);
+    syncValues(timeInElement, timeOutElement);
   }
 
   function onTimeOutChange() {
-    setTimeSync(timeOutElement, timeInElement);
+    syncValues(timeOutElement, timeInElement);
   }
 
   window.form = {

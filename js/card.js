@@ -5,6 +5,8 @@
   var cardTemplateElement = document.querySelector('#card').content.querySelector('.map__card');
   var popupPhoto = cardTemplateElement.querySelector('.popup__photo');
   var mapFiltersContainerElement = document.querySelector('.map__filters-container');
+  var closeCardElement;
+  var mapCardElement;
   var OfferTypeMapping = {
     flat: 'Квартира',
     bungalo: 'Бунгало',
@@ -29,22 +31,8 @@
     popupPhotosElement.appendChild(createPhotosFragment(pinData.offer.photos));
     cardElement.querySelector('.popup__avatar').src = pinData.author.avatar;
     mapFiltersContainerElement.insertAdjacentElement('beforebegin', cardElement);
-    var closeCardElement = cardElement.querySelector('.popup__close');
-    function closeCard() {
-      cardElement.remove();
-      closeCardElement.removeEventListener('click', onClickCloseCard);
-      document.removeEventListener('keydown', onKeydownCloseCard);
-    }
-
-    function onClickCloseCard() {
-      closeCard();
-    }
-
-    function onKeydownCloseCard(evt) {
-      if (evt.keyCode === ESC_KEYCODE) {
-        closeCard();
-      }
-    }
+    mapCardElement = cardElement;
+    closeCardElement = cardElement.querySelector('.popup__close');
 
     closeCardElement.addEventListener('click', onClickCloseCard);
     document.addEventListener('keydown', onKeydownCloseCard);
@@ -70,7 +58,27 @@
     return photosFragment;
   }
 
+  function closeCard() {
+    if (mapCardElement) {
+      mapCardElement.remove();
+      mapCardElement = null;
+      closeCardElement.removeEventListener('click', onClickCloseCard);
+      document.removeEventListener('keydown', onKeydownCloseCard);
+    }
+  }
+
+  function onClickCloseCard() {
+    closeCard();
+  }
+
+  function onKeydownCloseCard(evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closeCard();
+    }
+  }
+
   window.card = {
-    render: render
+    render: render,
+    close: closeCard
   };
 })();
