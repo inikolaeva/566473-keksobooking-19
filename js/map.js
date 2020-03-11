@@ -53,7 +53,7 @@
   function setActiveState() {
     window.form.setAdFormActive();
     window.filter.toggle(false);
-    window.filter.listeners();
+    window.filter.onListeners();
     mapElement.classList.remove('map--faded');
     getPinsData();
     setFormAddress(true);
@@ -89,7 +89,7 @@
   function filterPinsData(pins) {
     window.card.close();
     removeCurrentPins();
-    var filteredAds = window.filter.pins(pins);
+    var filteredAds = window.filter.getPins(pins);
     renderPins(filteredAds);
   }
 

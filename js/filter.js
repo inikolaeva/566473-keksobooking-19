@@ -13,7 +13,7 @@
     window.utils.toggleDisabled(mapFilterFieldsetElements, isDisabled);
   }
 
-  function filterListeners() {
+  function onListeners() {
     filtersContainerElement.addEventListener('change', function () {
       window.utils.debounce(window.map.getPinsData);
     });
@@ -43,8 +43,8 @@
 
   window.filter = {
     toggle: toggleFilter,
-    listeners: filterListeners,
-    pins: filterPins,
+    onListeners: onListeners,
+    getPins: filterPins,
     reset: resetFilter
   };
 })();
