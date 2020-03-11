@@ -53,7 +53,7 @@
   function setActiveState() {
     window.form.setAdFormActive();
     window.filter.toggle(false);
-    window.filter.onListeners();
+    window.filter.attachEvents();
     mapElement.classList.remove('map--faded');
     getPinsData();
     setFormAddress(true);
