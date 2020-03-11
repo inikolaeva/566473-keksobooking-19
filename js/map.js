@@ -86,7 +86,7 @@
     currentPins = [];
   }
 
-  function displayPinsData(pins) {
+  function filterPinsData(pins) {
     window.card.close();
     removeCurrentPins();
     var filteredAds = window.filter.filterPins(pins);
@@ -94,7 +94,7 @@
   }
 
   function onLoadSuccess(pins) {
-    displayPinsData(pins);
+    filterPinsData(pins);
   }
 
   function onMapPinMainKeydown(evt) {
