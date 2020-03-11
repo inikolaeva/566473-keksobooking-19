@@ -59,8 +59,8 @@
     priceElement.placeholder = minPrice.toString();
   }
 
-  function syncValues(BasedElement, acceptorElement) {
-    acceptorElement.value = BasedElement.value;
+  function syncValues(basedElement, acceptorElement) {
+    acceptorElement.value = basedElement.value;
   }
 
   function formListeners() {
