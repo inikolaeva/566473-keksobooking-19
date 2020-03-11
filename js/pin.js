@@ -2,7 +2,6 @@
 
 (function () {
   var pinTemplateElement = document.querySelector('#pin').content.querySelector('.map__pin');
-  var pinsS = [];
 
   function renderPin(pin) {
     var pinElement = pinTemplateElement.cloneNode(true);
@@ -15,7 +14,6 @@
       window.card.render(pin);
     }
     pinElement.addEventListener('click', onPinClick);
-    pinsS.push(pinElement)
     return pinElement;
   }
 

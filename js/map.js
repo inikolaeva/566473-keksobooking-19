@@ -14,6 +14,7 @@
   var mapPinsElement = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
   var isPageActive = false;
+  var currentPins = [];
   var DragSizeRestiction = {
     TOP: 130,
     BOTTOM: 630,
@@ -43,6 +44,7 @@
     isPageActive = false;
     window.form.setAdFormDisabled();
     window.filter.toggleFilter(true);
+    window.filter.resetFilter();
     removePins();
     mapElement.classList.add('map--faded');
     setFormAddress(false);
@@ -51,8 +53,9 @@
   function setActiveState() {
     window.form.setAdFormActive();
     window.filter.toggleFilter(false);
+    window.filter.filterListeners();
     mapElement.classList.remove('map--faded');
-    getData();
+    getPinsData();
     setFormAddress(true);
   }
 
@@ -63,20 +66,35 @@
     });
   }
 
-  function getData() {
-    window.load.getData(successHandler, window.utils.showErrorMessage);
+  function getPinsData() {
+    window.load.getData(onLoadSuccess, window.utils.showErrorMessage);
   }
 
-  function displayAllPins(pins) {
+  function renderPins(pins) {
     for (var j = 0; j < pins.length; j++) {
       var pinElement = window.pin.render(pins[j]);
+      currentPins.push(pinElement);
       fragment.appendChild(pinElement);
     }
     mapPinsElement.appendChild(fragment);
   }
 
-  function successHandler(pins) {
-    displayAllPins(pins);
+  function removeCurrentPins() {
+    currentPins.forEach(function (pin) {
+      pin.remove();
+    });
+    currentPins = [];
+  }
+
+  function displayPinsData(pins) {
+    window.card.close();
+    removeCurrentPins();
+    var filteredAds = window.filter.filterPins(pins);
+    renderPins(filteredAds);
+  }
+
+  function onLoadSuccess(pins) {
+    displayPinsData(pins);
   }
 
   function onMapPinMainKeydown(evt) {
@@ -142,6 +160,7 @@
 
   window.map = {
     setDisabledState: setDisabledState,
-    isPageActive: isPageActive
+    isPageActive: isPageActive,
+    getPinsData: getPinsData
   };
 })();
