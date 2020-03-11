@@ -8,17 +8,9 @@
   var filtersElements = filtersContainerElement.querySelector('.map__filter');
   var filteredAds = [];
 
-  function setFilterDisabled() {
-    window.utils.setDisabled(mapFilterSelectElements, true);
-    window.utils.setDisabled(mapFilterFieldsetElements, true);
-  }
-
-  function setFilterActive() {
-    window.utils.setDisabled(mapFilterSelectElements, false);
-    window.utils.setDisabled(mapFilterFieldsetElements, false);
-    filtersContainerElement.addEventListener('change', function () {
-      window.utils.debounce(window.pin.test);
-    });
+  function toggleFilter(isDisabled) {
+    window.utils.toggleDisabled(mapFilterSelectElements, isDisabled);
+    window.utils.toggleDisabled(mapFilterFieldsetElements, isDisabled);
   }
 
   function filterByType(ads, filterValue) {
@@ -42,8 +34,7 @@
   }
 
   window.filter = {
-    setFilterDisabled: setFilterDisabled,
-    setFilterActive: setFilterActive,
+    toggleFilter: toggleFilter,
     filterAds: filterAds
-  };
+  }
 })();

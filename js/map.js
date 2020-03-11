@@ -11,7 +11,9 @@
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapOverlayElement = document.querySelector('.map__overlay');
   var addressElement = document.querySelector('#address');
-  var activePage = false;
+  var mapPinsElement = document.querySelector('.map__pins');
+  var fragment = document.createDocumentFragment();
+  var isPageActive = false;
   var DragSizeRestiction = {
     TOP: 130,
     BOTTOM: 630,
@@ -38,26 +40,49 @@
 
 
   function setDisabledState() {
-    activePage = false;
+    isPageActive = false;
     window.form.setAdFormDisabled();
-    window.filter.setFilterDisabled();
-    window.pin.removePins();
+    window.filter.toggleFilter(true);
+    removePins();
     mapElement.classList.add('map--faded');
     setFormAddress(false);
   }
 
   function setActiveState() {
     window.form.setAdFormActive();
-    window.filter.setFilterActive();
+    window.filter.toggleFilter(false);
     mapElement.classList.remove('map--faded');
-    window.pin.getData();
+    getData();
     setFormAddress(true);
+  }
+
+  function removePins() {
+    var mapPinElements = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    mapPinElements.forEach(function (mapPin) {
+      mapPin.remove();
+    });
+  }
+
+  function getData() {
+    window.load.getData(successHandler, window.utils.showErrorMessage);
+  }
+
+  function displayAllPins(pins) {
+    for (var j = 0; j < pins.length; j++) {
+      var pinElement = window.pin.render(pins[j]);
+      fragment.appendChild(pinElement);
+    }
+    mapPinsElement.appendChild(fragment);
+  }
+
+  function successHandler(pins) {
+    displayAllPins(pins);
   }
 
   function onMapPinMainKeydown(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       setActiveState();
-      activePage = true;
+      isPageActive = true;
     }
   }
 
@@ -88,14 +113,14 @@
       if (mapPinMainPosition.y >= Border.TOP && mapPinMainPosition.y <= Border.BOTTOM) {
         mapPinMainElement.style.top = mapPinMainPosition.y + 'px';
       }
-      setFormAddress(activePage);
+      setFormAddress(isPageActive);
     }
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      if (!activePage) {
-        window.map.setActiveState();
-        activePage = true;
+      if (!isPageActive) {
+        setActiveState();
+        isPageActive = true;
       }
 
       document.removeEventListener('mousemove', onMouseMove);
@@ -108,6 +133,7 @@
 
   function init() {
     setDisabledState();
+    window.form.initForm();
     mapPinMainElement.addEventListener('mousedown', onMapPinMainMousedown);
     mapPinMainElement.addEventListener('keydown', onMapPinMainKeydown);
   }
@@ -115,7 +141,7 @@
   init();
 
   window.map = {
-    setActiveState: setActiveState,
-    setDisabledState: setDisabledState
+    setDisabledState: setDisabledState,
+    isPageActive: isPageActive
   };
 })();
