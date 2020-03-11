@@ -34,19 +34,17 @@
     if (selectedFilterValue === 'any') {
       filteredPinData = window.utils.getRandomArrValue(pinsData, PINS_AMOUNT_MAX);
     } else {
-      pinsData.forEach(function (pinData) {
-        if (pinData.offer.type === selectedFilterValue) {
-          filteredPinData.push(pinData);
-        }
+      filteredPinData = pinsData.filter(function (pinData) {
+        return pinData.offer.type === selectedFilterValue;
       });
     }
     return filteredPinData;
   }
 
   window.filter = {
-    toggleFilter: toggleFilter,
-    filterListeners: filterListeners,
-    filterPins: filterPins,
-    resetFilter: resetFilter
+    toggle: toggleFilter,
+    listeners: filterListeners,
+    pins: filterPins,
+    reset: resetFilter
   };
 })();

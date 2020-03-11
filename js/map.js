@@ -43,8 +43,8 @@
   function setDisabledState() {
     isPageActive = false;
     window.form.setAdFormDisabled();
-    window.filter.toggleFilter(true);
-    window.filter.resetFilter();
+    window.filter.toggle(true);
+    window.filter.reset();
     removePins();
     mapElement.classList.add('map--faded');
     setFormAddress(false);
@@ -52,8 +52,8 @@
 
   function setActiveState() {
     window.form.setAdFormActive();
-    window.filter.toggleFilter(false);
-    window.filter.filterListeners();
+    window.filter.toggle(false);
+    window.filter.listeners();
     mapElement.classList.remove('map--faded');
     getPinsData();
     setFormAddress(true);
@@ -89,7 +89,7 @@
   function filterPinsData(pins) {
     window.card.close();
     removeCurrentPins();
-    var filteredAds = window.filter.filterPins(pins);
+    var filteredAds = window.filter.pins(pins);
     renderPins(filteredAds);
   }
 
