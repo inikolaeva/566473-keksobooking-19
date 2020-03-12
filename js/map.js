@@ -71,11 +71,11 @@
   }
 
   function renderPins(pins) {
-    for (var j = 0; j < pins.length; j++) {
-      var pinElement = window.pin.render(pins[j]);
+    pins.forEach(function (pin) {
+      var pinElement = window.pin.render(pin);
       currentPins.push(pinElement);
       fragment.appendChild(pinElement);
-    }
+    });
     mapPinsElement.appendChild(fragment);
   }
 

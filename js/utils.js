@@ -24,9 +24,9 @@
   }
 
   function toggleDisabled(elements, state) {
-    for (var k = 0; k < elements.length; k++) {
-      elements[k].disabled = state;
-    }
+    elements.forEach(function (element) {
+      element.disabled = state;
+    });
   }
 
   // min - inclusive, max - exclusive
@@ -38,10 +38,10 @@
 
   function getRandomArrValue(arr, size) {
     var results = arr.slice();
-    for (var i = 0; i < size; i++) {
+    size.forEach(function () {
       var randomIndex = getRandomInt(0, results.length);
       results.splice(randomIndex, 1);
-    }
+    });
     return results;
   }
 
