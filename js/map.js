@@ -49,6 +49,7 @@
     removePins();
     mapElement.classList.add('map--faded');
     setFormAddress(false);
+    window.avatar.setDefault();
   }
 
   function setActiveState() {
@@ -57,6 +58,7 @@
     mapElement.classList.remove('map--faded');
     getPinsData();
     setFormAddress(true);
+    window.avatar.attachEvents();
   }
 
   function removePins() {
