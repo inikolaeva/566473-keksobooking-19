@@ -76,8 +76,12 @@
     });
   }
 
+  function applyAllFilters(it) {
+    return filtrationByType(it) && filtrationByPrice(it) && filtrationByRooms(it) && filtrationByGuests(it) && filtrationByFeatures(it);
+  }
+
   function filterPins(pinsData) {
-    var allPinData = pinsData.filter(filtrationByType).filter(filtrationByPrice).filter(filtrationByRooms).filter(filtrationByGuests).filter(filtrationByFeatures);
+    var allPinData = pinsData.filter(applyAllFilters);
     var filteredPinData = allPinData.slice(0, PINS_AMOUNT_MAX);
     return filteredPinData;
   }
