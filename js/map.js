@@ -53,7 +53,6 @@
 
   function setActiveState() {
     window.form.setAdFormActive();
-    window.filter.toggle(false);
     window.filter.attachEvents();
     mapElement.classList.remove('map--faded');
     getPinsData();
@@ -97,6 +96,7 @@
   function onLoadSuccess(pins) {
     currentPinsObj = pins;
     filterPinsData(pins);
+    window.filter.toggle(false);
   }
 
   function onMapPinMainKeydown(evt) {
