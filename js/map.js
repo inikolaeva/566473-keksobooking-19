@@ -14,6 +14,7 @@
   var mapPinsElement = document.querySelector('.map__pins');
   var fragment = document.createDocumentFragment();
   var isPageActive = false;
+  var currentPinsObj;
   var currentPins = [];
   var DragSizeRestiction = {
     TOP: 130,
@@ -86,14 +87,15 @@
     currentPins = [];
   }
 
-  function filterPinsData(pins) {
+  function filterPinsData() {
     window.card.close();
     removeCurrentPins();
-    var filteredAds = window.filter.getPins(pins);
+    var filteredAds = window.filter.getPins(currentPinsObj);
     renderPins(filteredAds);
   }
 
   function onLoadSuccess(pins) {
+    currentPinsObj = pins;
     filterPinsData(pins);
   }
 
@@ -161,6 +163,6 @@
   window.map = {
     setDisabledState: setDisabledState,
     isPageActive: isPageActive,
-    getPinsData: getPinsData
+    filterPinsData: filterPinsData
   };
 })();

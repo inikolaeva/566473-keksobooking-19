@@ -34,7 +34,7 @@
 
   function attachEvents() {
     filtersContainerElement.addEventListener('change', function () {
-      window.utils.debounce(window.map.getPinsData);
+      window.utils.debounce(window.map.filterPinsData);
     });
   }
 
