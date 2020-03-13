@@ -6,7 +6,7 @@
   var PIC_SIZE = {
     WIDTH: '70',
     HEIGHT: '70'
-  }
+  };
 
   var avatarFileChooser = document.querySelector('.ad-form__field input[type=file]');
   var avatar = document.querySelector('.ad-form-header__preview img');
@@ -40,8 +40,8 @@
 
   function onHomePhotoChange() {
     var imgItem = document.createElement('img');
-    imgItem.width = PIC_SIZE.width;
-    imgItem.height = PIC_SIZE.height;
+    imgItem.width = PIC_SIZE.WIDTH;
+    imgItem.height = PIC_SIZE.HEIGHT;
     displayPicture(homePhotoFileChooser, imgItem);
     homePhoto.appendChild(imgItem);
   }
