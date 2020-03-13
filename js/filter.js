@@ -82,8 +82,7 @@
 
   function filterPins(pinsData) {
     var allPinData = pinsData.filter(applyAllFilters);
-    var filteredPinData = allPinData.slice(0, PINS_AMOUNT_MAX);
-    return filteredPinData;
+    return allPinData.slice(0, PINS_AMOUNT_MAX);
   }
 
   window.filter = {
