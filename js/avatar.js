@@ -1,9 +1,8 @@
 'use strict';
 
 (function () {
-  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var DEFAULT_AVATAR = 'img/muffin-grey.svg';
-  var PIC_SIZE = {
+  var PicSize = {
     WIDTH: '70',
     HEIGHT: '70'
   };
@@ -12,9 +11,11 @@
   var avatar = document.querySelector('.ad-form-header__preview img');
   var homePhotoFileChooser = document.querySelector('.ad-form__upload input[type=file]');
   var homePhoto = document.querySelector('.ad-form__photo');
+  var photoContainer = document.querySelector('.ad-form__photo-container');
 
   function setDefault() {
     setDefaultAvatar();
+    removeHomePhotos();
     removeHomePhotos();
   }
 
@@ -23,7 +24,7 @@
   }
 
   function removeHomePhotos() {
-    var homePhotos = document.querySelectorAll('.ad-form__photo img');
+    var homePhotos = photoContainer.querySelectorAll('.ad-form__photo');
     homePhotos.forEach(function (photo) {
       photo.remove();
     });
@@ -39,27 +40,24 @@
   }
 
   function onHomePhotoChange() {
+    var homePhotoClone = homePhoto.cloneNode(true);
     var imgItem = document.createElement('img');
-    imgItem.width = PIC_SIZE.WIDTH;
-    imgItem.height = PIC_SIZE.HEIGHT;
+    homePhotoClone.appendChild(imgItem);
+    imgItem.width = PicSize.WIDTH;
+    imgItem.height = PicSize.HEIGHT;
     displayPicture(homePhotoFileChooser, imgItem);
-    homePhoto.appendChild(imgItem);
+    photoContainer.appendChild(homePhotoClone);
   }
 
   function displayPicture(fileChooser, imgElement) {
     var file = fileChooser.files[0];
-    var fileName = file.name.toLowerCase();
-    var matches = FILE_TYPES.some(function (it) {
-      return fileName.endsWith(it);
+    var reader = new FileReader();
+    reader.addEventListener('load', function () {
+      imgElement.src = reader.result;
     });
-    if (matches) {
-      var reader = new FileReader();
-      reader.addEventListener('load', function () {
-        imgElement.src = reader.result;
-      });
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file);
   }
+
 
   window.avatar = {
     setDefault: setDefault,
