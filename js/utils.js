@@ -36,26 +36,10 @@
     });
   }
 
-  // min - inclusive, max - exclusive
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function getRandomArrValue(arr, size) {
-    var results = arr.slice();
-    size.forEach(function () {
-      var randomIndex = getRandomInt(0, results.length);
-      results.splice(randomIndex, 1);
-    });
-    return results;
-  }
 
   window.utils = {
     showErrorMessage: showErrorMessage,
     toggleDisabled: toggleDisabled,
-    debounce: debounce,
-    getRandomArrValue: getRandomArrValue
+    debounce: debounce
   };
 })();
