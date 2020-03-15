@@ -7,10 +7,7 @@
     width: 65,
     height: 65
   };
-  var DEFAULT_PIN_ADDRESS = {
-    x: 570,
-    y: 375
-  };
+  var defaultPinAddress = {};
   var mapElement = document.querySelector('.map');
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapOverlayElement = document.querySelector('.map__overlay');
@@ -45,8 +42,8 @@
   }
 
   function setDefaultPinPosition() {
-    setLeftPinOffset(DEFAULT_PIN_ADDRESS.x);
-    setTopPinOffset(DEFAULT_PIN_ADDRESS.y);
+    setLeftPinOffset(defaultPinAddress.x);
+    setTopPinOffset(defaultPinAddress.y);
   }
 
   function setLeftPinOffset(x) {
@@ -176,6 +173,8 @@
     window.form.init();
     mapPinMainElement.addEventListener('mousedown', onMapPinMainMousedown);
     mapPinMainElement.addEventListener('keydown', onMapPinMainKeydown);
+    defaultPinAddress.x = mapPinMainElement.offsetLeft;
+    defaultPinAddress.y = mapPinMainElement.offsetTop;
   }
 
   init();

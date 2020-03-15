@@ -2,8 +2,8 @@
 
 (function () {
   var ESC_KEYCODE = 27;
-  var NOT_FOR_GUEST_VALUE = 0;
-  var ROOM_100_VALUE = 100;
+  var MIN_GUESTS_AMOUNT = 0;
+  var MAX_ROOMS_AMOUNT = 100;
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
   var typeElement = document.querySelector('#type');
@@ -38,13 +38,13 @@
   function initForm() {
     setPriceValidation();
     setGuestValidation();
-    formListeners();
+    attachFormListeners();
   }
 
   function setGuestValidation() {
     var roomNumber = Number(roomNumberElement.value);
     var selectedGuestValue = Number(guestElement.value);
-    if ((roomNumber === ROOM_100_VALUE && selectedGuestValue !== NOT_FOR_GUEST_VALUE) || (roomNumber !== ROOM_100_VALUE && selectedGuestValue === NOT_FOR_GUEST_VALUE)) {
+    if ((roomNumber === MAX_ROOMS_AMOUNT && selectedGuestValue !== MIN_GUESTS_AMOUNT) || (roomNumber !== MAX_ROOMS_AMOUNT && selectedGuestValue === MIN_GUESTS_AMOUNT)) {
       guestElement.setCustomValidity('"не для гостей" можно выбрать только для "100 мест"');
     } else if (roomNumber < selectedGuestValue) {
       guestElement.setCustomValidity('Такое количество гостей недопустимо: 1 комната — «для 1 гостя»; 2 комнаты — «для 1 или 2 гостей»;3 комнаты — «для 1-3 гостей»');
@@ -64,7 +64,7 @@
     acceptorElement.value = basedElement.value;
   }
 
-  function formListeners() {
+  function attachFormListeners() {
     roomNumberElement.addEventListener('change', onRoomGuestChange);
     guestElement.addEventListener('change', onRoomGuestChange);
     typeElement.addEventListener('change', onTypeInputChange);
