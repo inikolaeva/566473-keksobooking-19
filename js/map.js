@@ -10,7 +10,7 @@
   var DEFAULT_PIN_ADDRESS = {
     x: 570,
     y: 375
-  }
+  };
   var mapElement = document.querySelector('.map');
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapOverlayElement = document.querySelector('.map__overlay');
@@ -49,11 +49,11 @@
     setTopPinOffset(DEFAULT_PIN_ADDRESS.y);
   }
 
-  function setLeftPinOffset(x){
+  function setLeftPinOffset(x) {
     mapPinMainElement.style.left = x + 'px';
   }
 
-  function setTopPinOffset(y){
+  function setTopPinOffset(y) {
     mapPinMainElement.style.top = y + 'px';
   }
 
