@@ -7,6 +7,10 @@
     width: 65,
     height: 65
   };
+  var DEFAULT_PIN_ADDRESS = {
+    x: 570,
+    y: 375
+  }
   var mapElement = document.querySelector('.map');
   var mapPinMainElement = document.querySelector('.map__pin--main');
   var mapOverlayElement = document.querySelector('.map__overlay');
@@ -40,20 +44,34 @@
     addressElement.value = x + ', ' + y;
   }
 
+  function setDefaultPinPosition() {
+    setLeftPinOffset(DEFAULT_PIN_ADDRESS.x);
+    setTopPinOffset(DEFAULT_PIN_ADDRESS.y);
+  }
+
+  function setLeftPinOffset(x){
+    mapPinMainElement.style.left = x + 'px';
+  }
+
+  function setTopPinOffset(y){
+    mapPinMainElement.style.top = y + 'px';
+  }
 
   function setDisabledState() {
     isPageActive = false;
-    window.form.setAdFormDisabled();
+    window.form.setDisabled();
     window.filter.toggle(true);
     window.filter.reset();
     removePins();
     mapElement.classList.add('map--faded');
+    setDefaultPinPosition();
     setFormAddress(false);
     window.avatar.setDefault();
+    window.card.close();
   }
 
   function setActiveState() {
-    window.form.setAdFormActive();
+    window.form.setActive();
     window.filter.attachEvents();
     mapElement.classList.remove('map--faded');
     getPinsData();
@@ -130,10 +148,10 @@
         y: mapPinMainElement.offsetTop - shift.y
       };
       if (mapPinMainPosition.x >= Border.LEFT && mapPinMainPosition.x <= Border.RIGHT) {
-        mapPinMainElement.style.left = mapPinMainPosition.x + 'px';
+        setLeftPinOffset(mapPinMainPosition.x);
       }
       if (mapPinMainPosition.y >= Border.TOP && mapPinMainPosition.y <= Border.BOTTOM) {
-        mapPinMainElement.style.top = mapPinMainPosition.y + 'px';
+        setTopPinOffset(mapPinMainPosition.y);
       }
       setFormAddress(isPageActive);
     }
@@ -155,7 +173,7 @@
 
   function init() {
     setDisabledState();
-    window.form.initForm();
+    window.form.init();
     mapPinMainElement.addEventListener('mousedown', onMapPinMainMousedown);
     mapPinMainElement.addEventListener('keydown', onMapPinMainKeydown);
   }

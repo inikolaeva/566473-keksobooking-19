@@ -33,9 +33,7 @@
   }
 
   function attachEvents() {
-    filtersContainerElement.addEventListener('change', function () {
-      window.utils.debounce(window.map.filterPinsData);
-    });
+    filtersContainerElement.addEventListener('change', window.utils.debounce(window.map.filterPinsData));
   }
 
   function resetFilter() {

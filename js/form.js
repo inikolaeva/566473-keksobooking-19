@@ -2,6 +2,8 @@
 
 (function () {
   var ESC_KEYCODE = 27;
+  var NOT_FOR_GUEST_VALUE = 0;
+  var ROOM_100_VALUE = 100;
   var roomNumberElement = document.querySelector('#room_number');
   var guestElement = document.querySelector('#capacity');
   var typeElement = document.querySelector('#type');
@@ -15,7 +17,6 @@
   var errorTemplate = document.querySelector('#error').content.querySelector('.error');
   var successElement;
   var errorElement;
-
   var OfferTypeMinPriceMapping = {
     bungalo: 0,
     flat: 1000,
@@ -43,7 +44,7 @@
   function setGuestValidation() {
     var roomNumber = Number(roomNumberElement.value);
     var selectedGuestValue = Number(guestElement.value);
-    if ((roomNumber === 100 && selectedGuestValue !== 0) || (roomNumber !== 100 && selectedGuestValue === 0)) {
+    if ((roomNumber === ROOM_100_VALUE && selectedGuestValue !== NOT_FOR_GUEST_VALUE) || (roomNumber !== ROOM_100_VALUE && selectedGuestValue === NOT_FOR_GUEST_VALUE)) {
       guestElement.setCustomValidity('"не для гостей" можно выбрать только для "100 мест"');
     } else if (roomNumber < selectedGuestValue) {
       guestElement.setCustomValidity('Такое количество гостей недопустимо: 1 комната — «для 1 гостя»; 2 комнаты — «для 1 или 2 гостей»;3 комнаты — «для 1-3 гостей»');
@@ -157,8 +158,8 @@
   }
 
   window.form = {
-    setAdFormDisabled: setAdFormDisabled,
-    setAdFormActive: setAdFormActive,
-    initForm: initForm
+    setDisabled: setAdFormDisabled,
+    setActive: setAdFormActive,
+    init: initForm
   };
 })();
