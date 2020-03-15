@@ -36,7 +36,6 @@
     });
   }
 
-
   window.utils = {
     showErrorMessage: showErrorMessage,
     toggleDisabled: toggleDisabled,
